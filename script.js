@@ -12,6 +12,43 @@ const sum=a=>a.reduce((x,y)=>x+y,0);
 const pct=(now,prev)=>prev===0?null:(now-prev)/prev*100;
 const el=id=>document.getElementById(id);
 let active=0;
+const passwordHash="00a9343f048bf05f68d6379512d4eade08b21545a8e4bd7f684cd2241a8baa89";
+
+async function sha256(value){
+ const bytes=new TextEncoder().encode(value);
+ const digest=await crypto.subtle.digest("SHA-256",bytes);
+ return Array.from(new Uint8Array(digest)).map(byte=>byte.toString(16).padStart(2,"0")).join("");
+}
+function unlockDashboard(){
+ document.body.classList.remove("locked");
+ el("login-gate").classList.add("hidden");
+ el("dashboard").setAttribute("aria-hidden","false");
+ try{sessionStorage.setItem("hat-dashboard-unlocked","1")}catch(error){}
+}
+function setupLogin(){
+ try{if(sessionStorage.getItem("hat-dashboard-unlocked")==="1"){unlockDashboard();return}}catch(error){}
+ const form=el("login-form");
+ const input=el("login-password");
+ const errorBox=el("login-error");
+ form.addEventListener("submit",async event=>{
+  event.preventDefault();
+  const button=form.querySelector("button");
+  button.disabled=true;
+  errorBox.textContent="";
+  try{
+   if(await sha256(input.value)===passwordHash){unlockDashboard();input.value="";return}
+   errorBox.textContent="رمز واردشده صحیح نیست.";
+  }catch(error){
+   errorBox.textContent="امکان بررسی رمز در این مرورگر وجود ندارد.";
+  }finally{
+   button.disabled=false;
+  }
+  form.classList.remove("shake");
+  void form.offsetWidth;
+  form.classList.add("shake");
+  input.select();
+ });
+}
 
 function panelHead(number,title,subtitle,unit){
  return '<div class="panel-head"><div><span class="section-no">'+number+'</span><div><h2>'+title+'</h2><small>'+subtitle+'</small></div></div>'+(unit?'<span class="unit">'+unit+'</span>':'')+'</div>';
@@ -53,3 +90,4 @@ function render(){
  el("footer-unit").textContent="واحد این بخش: "+cat.unit;
 }
 render();
+setupLogin();
