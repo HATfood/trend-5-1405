@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#173f35">
+  <title>۵ روند برتر ۱۴۰۵ | هستی آرین تأمین</title>
+  <meta name="description" content="داشبورد مدیریتی روند فروش و سهم برندهای هستی آرین تأمین در سال ۱۴۰۵">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="locked">
+  <div class="login-gate" id="login-gate" role="dialog" aria-modal="true" aria-labelledby="login-title">
+    <form class="login-card" id="login-form">
+      <span class="login-mark">HAT</span>
+      <p class="login-kicker">داشبورد داخلی</p>
+      <h1 id="login-title">ورود به گزارش فروش</h1>
+      <p class="login-copy">برای مشاهده اطلاعات، رمز ورود را وارد کنید.</p>
+      <label for="login-password">رمز ورود</label>
+      <div class="password-row">
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required autofocus placeholder="رمز را وارد کنید">
+        <button type="submit">ورود</button>
+      </div>
+      <p class="login-error" id="login-error" aria-live="polite"></p>
+    </form>
+  </div>
+  <main id="dashboard" aria-hidden="true">
+    <header class="topbar">
+      <a class="brand" href="#top"><span class="brand-mark">HAT</span><span><b>هستی آرین تأمین</b><small>داشبورد هوشمند فروش</small></span></a>
+      <span class="update"><i></i>به‌روزرسانی تا پایان مرداد ۱۴۰۵</span>
+    </header>
+    <section class="hero" id="top">
+      <div><span class="eyebrow">گزارش تجمعی پنج‌ماهه</span><h1>فروش در سال <em>۱۴۰۵</em></h1><p>نمای یکپارچه عملکرد برندها، سهم شرکت و روند ماهانه در شش گروه محصول</p></div>
+      <div class="hero-badge"><span>۵</span><small>ماه داده<br>قابل مقایسه</small></div>
+    </section>
+    <nav class="tabs" id="tabs" aria-label="انتخاب گروه محصول"></nav>
+    <section class="kpis" id="kpis"></section>
+    <section class="dashboard-grid">
+      <article class="panel trend-panel" id="trend-panel"></article>
+      <article class="panel share-panel" id="share-panel"></article>
+    </section>
+    <section class="panel table-panel" id="table-panel"></section>
+    <footer><span id="footer-unit"></span><span>داده‌ها با داشبورد مرجع Canva تطبیق داده شده‌اند.</span></footer>
+  </main>
+</body>
+</html>

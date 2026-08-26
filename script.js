@@ -1,11 +1,11 @@
 const months=["فروردین","اردیبهشت","خرداد","تیر","مرداد"];
 const categories=[
- {name:"چای خارجی",unit:"تن",companyShare:54.8,monthlyShares:[52.9,56.5,51.7,57.2,55.6],brands:["فامیلا","بلوط","کیمبال","هم‌خوان"],values:[[34,34,24,21,15],[36,39,33,41,21],[7,3,1,0,0],[53,112,70,60,50]],others:[116,146,119,92,69],monthTotals:[246,335,246,215,156],aggregateValues:[128,171,12,346],aggregateOthers:542,aggregateTotal:1198,color:"#087f8c",soft:"#d9f1ef"},
- {name:"چای ایرانی",unit:"تن",companyShare:73.7,monthlyShares:[74.5,78.2,69.2,74.4,68.6],brands:["بلوط","هم‌خوان"],values:[[20,48,30,17,11],[45,50,38,33,21]],others:[22,27,31,17,15],monthTotals:[87,125,99,68,46],aggregateValues:[126,186],aggregateOthers:112,aggregateTotal:424,color:"#1f9d78",soft:"#dcf5e9"},
- {name:"قهوه",unit:"تن",companyShare:3,monthlyShares:[2.3,3.6,4.1,4.8,3],brands:["بلوط"],values:[[1,3,3,3.6,3]],others:[99,122,90,84,59],monthTotals:[100,125,93,88,62],aggregateValues:[14],aggregateOthers:455,aggregateTotal:469,color:"#8a5a3b",soft:"#f2e4d8",note:"سهم تجمعی قهوه با کنترل اعداد مرجع محاسبه شده است: ۱۴ تن فروش بلوط از ۴۶۹ تن کل گروه، معادل ۳٪."},
- {name:"دمنوش",unit:"کیلوگرم",companyShare:73.7,monthlyShares:[59.3,71.4,75.9,77.2,82.3],brands:["فامیلا"],values:[[875,1876,2296,1516,1350]],others:[600,752,729,449,290],monthTotals:[1475,2628,3025,1965,1640],aggregateValues:[7912],aggregateOthers:2820,aggregateTotal:10732,color:"#6b5ca5",soft:"#e9e5f5"},
- {name:"ادویه",unit:"تن",companyShare:86.9,monthlyShares:[95.1,85.8,82.7,84.1,86.8],brands:["فامیلا","سانتین"],values:[[18,18,17,17,12],[20,19,17,16,12]],others:[2,6,7,6,4],monthTotals:[40,44,41,40,27],aggregateValues:[83,84],aggregateOthers:25,aggregateTotal:193,color:"#d97706",soft:"#fff0d0"},
- {name:"نمک",unit:"تن",companyShare:37.7,monthlyShares:[37.8,33.5,35.9,39.1,44],brands:["سانتین"],values:[[400,429,443,452,381]],others:[657,849,790,705,485],monthTotals:[1056,1278,1224,1157,866],aggregateValues:[2105],aggregateOthers:3476,aggregateTotal:5581,color:"#2563a8",soft:"#dcecf9"}
+ {name:"چای خارجی",unit:"تن",companyShare:57.3,monthlyShares:[52.9,56.5,51.7,57.2,66],brands:["فامیلا","بلوط","کیمبال","هم‌خوان"],values:[[34,34,24,21,27],[36,39,33,41,42],[7,3,1,0,0],[53,112,70,60,120]],others:[116,146,119,92,98],monthTotals:[246,335,246,215,288],aggregateValues:[141,192,12,415],aggregateOthers:567,aggregateTotal:1327,color:"#087f8c",soft:"#d9f1ef"},
+ {name:"چای ایرانی",unit:"تن",companyShare:73.4,monthlyShares:[74.5,78.2,69.2,74.4,68.8],brands:["بلوط","هم‌خوان"],values:[[20,48,30,17,19],[45,50,38,33,34]],others:[22,27,31,17,24],monthTotals:[87,125,99,68,77],aggregateValues:[135,199],aggregateOthers:121,aggregateTotal:455,color:"#1f9d78",soft:"#dcf5e9"},
+ {name:"قهوه",unit:"تن",companyShare:3,monthlyShares:[2.3,3.6,4.1,5,3.1],brands:["بلوط"],values:[[1,3,3,3.6,5]],others:[99,122,90,84,86],monthTotals:[100,125,93,88,91],aggregateValues:[15],aggregateOthers:482,aggregateTotal:497,color:"#8a5a3b",soft:"#f2e4d8"},
+ {name:"دمنوش",unit:"کیلوگرم",companyShare:74,monthlyShares:[59.3,71.4,75.9,77.2,80.9],brands:["فامیلا"],values:[[875,1876,2296,1516,1891]],others:[600,752,729,449,447],monthTotals:[1475,2628,3025,1965,2338],aggregateValues:[8454],aggregateOthers:2976,aggregateTotal:11430,color:"#6b5ca5",soft:"#e9e5f5"},
+ {name:"ادویه",unit:"تن",companyShare:86.9,monthlyShares:[95.1,85.8,82.7,84.1,87.1],brands:["فامیلا","سانتین"],values:[[18,18,17,17,17],[20,19,17,16,17]],others:[2,6,7,6,5],monthTotals:[40,44,41,40,40],aggregateValues:[88,90],aggregateOthers:27,aggregateTotal:205,color:"#d97706",soft:"#fff0d0"},
+ {name:"نمک",unit:"تن",companyShare:38.2,monthlyShares:[37.8,33.5,35.9,39.1,44.5],brands:["سانتین"],values:[[400,429,443,452,561]],others:[657,849,790,705,699],monthTotals:[1056,1278,1224,1157,1260],aggregateValues:[2285],aggregateOthers:3690,aggregateTotal:5976,color:"#2563a8",soft:"#dcecf9"}
 ];
 const fa=n=>new Intl.NumberFormat("fa-IR",{maximumFractionDigits:1}).format(n);
 const sum=a=>a.reduce((x,y)=>x+y,0);
@@ -66,7 +66,6 @@ function render(){
  const columnMaxes=cat.values.map(v=>Math.max(...v));
  renderTabs();
  el("kpis").innerHTML='<article><span>فروش تجمعی گروه</span><strong>'+fa(cat.aggregateTotal)+'</strong><small>'+cat.unit+' در پنج ماه</small></article><article><span>فروش برندهای شرکت</span><strong>'+fa(grandCompany)+'</strong><small>'+cat.unit+'</small></article><article><span>ماه اوج فروش گروه</span><strong>'+months[bestIndex]+'</strong><small>'+fa(cat.monthTotals[bestIndex])+' '+cat.unit+'</small></article><article class="accent-card" style="background:'+cat.color+'"><span>سهم هستی آرین</span><strong>'+fa(cat.companyShare)+'٪</strong><small>از گروه '+cat.name+'</small></article>';
- el("data-note").innerHTML=cat.note?'<aside class="data-note"><b>کنترل داده قهوه</b><span>'+cat.note+'</span></aside>':'';
  const bars=ownMonthly.map((v,i)=>{
   const change=i?pct(v,ownMonthly[i-1]):null;
   const delta=change===null?'<span class="delta neutral">ماه پایه</span>':'<span class="delta '+(change>=0?'up':'down')+'"><i>'+(change>=0?'▲':'▼')+'</i>'+fa(Math.abs(change))+'٪</span>';
