@@ -7,6 +7,14 @@ const categories=[
  {name:"ادویه",unit:"تن",companyShare:87,monthlyShares:[95.1,85.8,82.7,83.2,86.2,88.2,88.9],brands:["فامیلا","سانتین"],values:[[18.26151,18.20864,17.02268,17.69158,17.93262,19.30909,7.39217],[20.01765,19.09196,17.20287,16.87085,18.36745,19.80236,7.74674]],others:[1.96148536,6.19391632,7.14349576,6.95809386,5.79871722,5.2200216,1.89006692],monthTotals:[40.24064536,43.49451632,41.36904576,41.52052386,42.09878722,44.3314716,17.02897692],aggregateValues:[115.81829,119.09988],aggregateOthers:35.16579704,aggregateTotal:270.08396704,topBrands:{month:[{name:"سانتین",value:7.74674,share:45.4915},{name:"فامیلا",value:7.39217,share:43.4094},{name:"گلستان",value:1.20746,share:7.0906}],year:[{name:"سانتین",value:119.09988,share:44.0974},{name:"فامیلا",value:115.81829,share:42.8823},{name:"گلستان",value:22.878545,share:8.4709}]},color:"#d97706",soft:"#fff0d0"},
  {name:"نمک",unit:"تن",companyShare:40.9,monthlyShares:[37.8,33.6,36.2,38.2,43.6,49.9,52.4],brands:["سانتین"],values:[[399.5293326,428.62183321,443.28654253,459.70801804,587.43522005,683.51725903,272.2754568]],others:[656.56269453,848.62117664,780.78567749,745.14472761,758.47756422,685.89845339,247.0093227],monthTotals:[1056.09202713,1277.24300985,1224.07222002,1204.85274565,1345.91278427,1369.41571242,519.2847795],aggregateValues:[3274.37366226],aggregateOthers:4722.49961658,aggregateTotal:7996.87327884,topBrands:{month:[{name:"سانتین",value:272.2754568,share:52.4328},{name:"تابان",value:126.76165,share:24.4108},{name:"فردینه",value:77.72891478,share:14.9685}],year:[{name:"سانتین",value:3274.37366226,share:40.9457},{name:"تابان",value:2357.90675,share:29.4854},{name:"فردینه",value:1630.26082956,share:20.3862}]},color:"#2563a8",soft:"#dcecf9"}
 ];
+const categoryImages={
+ "چای خارجی":"assets/chai-khareji.png",
+ "چای ایرانی":"assets/chai-irani.png",
+ "قهوه":"assets/ghahve.png",
+ "دمنوش":"assets/damnoosh.png",
+ "ادویه":"assets/advieh.png",
+ "نمک":"assets/namak.png"
+};
 const fa=n=>new Intl.NumberFormat("fa-IR",{maximumFractionDigits:1}).format(n);
 const faShare=n=>n>0&&n<.1?"کمتر از ۰٫۱٪":fa(n)+"٪";
 const sum=a=>a.reduce((x,y)=>x+y,0);
@@ -51,6 +59,25 @@ function setupLogin(){
  });
 }
 
+function openReferenceImage(src,alt){
+ el("lightbox-image").src=src;
+ el("lightbox-image").alt=alt;
+ el("image-lightbox").classList.add("open");
+ el("image-lightbox").setAttribute("aria-hidden","false");
+ document.body.classList.add("lightbox-open");
+ el("lightbox-close").focus();
+}
+function closeReferenceImage(){
+ el("image-lightbox").classList.remove("open");
+ el("image-lightbox").setAttribute("aria-hidden","true");
+ document.body.classList.remove("lightbox-open");
+}
+function setupLightbox(){
+ el("lightbox-close").addEventListener("click",closeReferenceImage);
+ el("image-lightbox").addEventListener("click",event=>{if(event.target===el("image-lightbox"))closeReferenceImage()});
+ document.addEventListener("keydown",event=>{if(event.key==="Escape"&&el("image-lightbox").classList.contains("open"))closeReferenceImage()});
+}
+
 function panelHead(number,title,subtitle,unit){
  return '<div class="panel-head"><div><span class="section-no">'+number+'</span><div><h2>'+title+'</h2><small>'+subtitle+'</small></div></div>'+(unit?'<span class="unit">'+unit+'</span>':'')+'</div>';
 }
@@ -90,6 +117,10 @@ function render(){
  const aggregateCells=cat.aggregateValues.map(v=>'<td>'+fa(v)+'</td>').join("");
  el("table-panel").innerHTML=panelHead("۰۳","مقایسه عملکرد ماهانه","نوار داخل هر سلول، شدت فروش همان برند را در ماه‌های مختلف نشان می‌دهد.","همه اعداد: "+cat.unit)+'<div class="table-scroll"><table><thead><tr><th>ماه</th>'+headers+'<th>جمع شرکت</th><th>سایر برندها</th><th>کل گروه</th><th>سهم شرکت</th><th>تغییر شرکت</th></tr></thead><tbody>'+rows+'<tr class="total-row"><td>۱۴۰۵ تا کنون</td>'+aggregateCells+'<td>'+fa(grandCompany)+'</td><td>'+fa(cat.aggregateOthers)+'</td><td>'+fa(cat.aggregateTotal)+'</td><td>'+fa(cat.companyShare)+'٪</td><td>—</td></tr></tbody></table></div>';
  el("footer-unit").textContent="واحد این بخش: "+cat.unit;
+ const imageSrc=categoryImages[cat.name];
+ el("reference-image").innerHTML='<button type="button" aria-label="نمایش تمام‌صفحه نمودار '+cat.name+'"><img src="'+imageSrc+'" alt="نمودار '+cat.name+'"></button>';
+ el("reference-image").querySelector("button").addEventListener("click",()=>openReferenceImage(imageSrc,"نمودار "+cat.name));
 }
+setupLightbox();
 render();
 setupLogin();
